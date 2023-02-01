@@ -1,0 +1,16 @@
+// It can be implemented using a loop to traverse the array, 
+// and store the difference between the target and the current element in a dictionary. 
+// Then, for each element in the array, check if the difference exists in the dictionary. 
+// If it does, return the pair of values.
+
+public int[] TwoSum(int[] nums, int target) {
+Dictionary<int, int> map = new Dictionary<int, int>();
+for (int i = 0; i < nums.Length; i++) {
+    int complement = target - nums[i];
+    if (map.ContainsKey(complement)) {
+        return new int[] { map[complement], i };
+    }
+    map[nums[i]] = i;
+}
+throw new Exception("No two sum solution");
+}

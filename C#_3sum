@@ -1,0 +1,27 @@
+// This can be implemented by first sorting the array, then using a loop to fix one element.
+// And then use two pointers (one from the left and one from the right) 
+// to find the other two elements that add up to the target.
+
+public IList<IList<int>> ThreeSum(int[] nums) {
+Array.Sort(nums);
+IList<IList<int>> res = new List<IList<int>>();
+for (int i = 0; i < nums.Length - 2; i++) {
+    if (i > 0 && nums[i] == nums[i - 1]) continue;
+    int left = i + 1, right = nums.Length - 1;
+    int target = -nums[i];
+    while (left < right) {
+        if (nums[left] + nums[right] == target) {
+            res.Add(new List<int> { nums[i], nums[left], nums[right] });
+            while (left < right && nums[left] == nums[left + 1]) left++;
+            while (left < right && nums[right] == nums[right - 1]) right--;
+            left++;
+            right--;
+        } else if (nums[left] + nums[right] < target) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+}
+return res;
+}
